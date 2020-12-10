@@ -31,17 +31,6 @@ exports.validationDaftar = [
 ];
 
 exports.validationLogin = [
-  check("nama", "nama tidak boleh kosong").notEmpty(),
-  check("noHP", "noHP tidak boleh kosong").notEmpty(),
   check("username", "username tidak boleh kosong").notEmpty(),
   check("password", "password tidak boleh kosong").notEmpty(),
-  check("ttl", "ttl tidak boleh kosong").notEmpty(),
-  check("noKK", "noKK tidak boleh kosong").notEmpty(),
-  check("noNPWP", "noNPWP tidak boleh kosong").notEmpty(),
-  check("nik", "NIK tidak boleh kosong").notEmpty(),
-  check("memberType", "memberType tidak boleh kosong").notEmpty(),
-  check("luasLahan", "ttl tidak boleh kosong").notEmpty(),
-  check("alamatLahan", "noKK tidak boleh kosong").notEmpty(),
-  check("alamatToko", "noNPWP tidak boleh kosong").notEmpty(),
-  check("kelompokTani", "NIK tidak boleh kosong").notEmpty(),
 ];
