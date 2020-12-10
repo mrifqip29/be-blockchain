@@ -15,7 +15,6 @@ exports.DaftarUser = async (req, res) => {
     noNPWP,
     nik,
     memberType,
-    memberInfo,
     luasLahan,
     alamatToko,
     alamatLahan,
