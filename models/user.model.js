@@ -17,19 +17,19 @@ const userSchema = new mongoose.Schema({
     type: String,
   },
   noKK: {
-    type: String,
+    type: Int32Array,
   },
   noNPWP: {
-    type: String,
+    type: Int32Array,
   },
   nik: {
-    type: String,
+    type: Int32Array,
   },
   memberType: {
     type: String,
   },
   luasLahan: {
-    type: String,
+    type: Int32Array,
   },
   alamatToko: {
     type: String,
