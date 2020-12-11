@@ -1,5 +1,5 @@
 require("dotenv").config();
-const Trx = require("../models/trx-penangkar-petani.model");
+const Trx = require("../models/trx-pengumpul-pedagang.model");
 const e = require("express");
 
 exports.CreateTrxPplPdg = async (req, res) => {
