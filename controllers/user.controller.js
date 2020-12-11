@@ -60,7 +60,7 @@ exports.DaftarUser = async (req, res) => {
   });
 };
 
-exports.LoginUSer = async (req, res) => {
+exports.LoginUser = async (req, res) => {
   const { username, password } = req.body;
 
   const userDB = await User.findOne({ username: username });
