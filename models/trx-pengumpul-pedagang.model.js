@@ -4,7 +4,7 @@ const trxPplPdgSchema = new mongoose.Schema({
   alamatPengirim: {
     type: String,
   },
-  alamatPengirim: {
+  alamatPenerima: {
     type: String,
   },
   kuantitas: {

@@ -4,7 +4,7 @@ const trxPtnPplSchema = new mongoose.Schema({
   alamatPengirim: {
     type: String,
   },
-  alamatPengirim: {
+  alamatPenerima: {
     type: String,
   },
   kuantitas: {
@@ -16,16 +16,19 @@ const trxPtnPplSchema = new mongoose.Schema({
   timestamp: {
     type: Date,
   },
-  umurBenih: {
+  ukuranUmbi: {
     type: String,
   },
-  lamaPenyimpanan: {
+  kadarAir: {
     type: String,
   },
-  varietas: {
+  pupuk: {
     type: String,
   },
-  hargaBenih: {
+  pestisida: {
+    type: String,
+  },
+  perlakuan: {
     type: String,
   },
 });
