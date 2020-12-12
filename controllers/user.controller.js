@@ -70,10 +70,17 @@ exports.LoginUser = async (req, res) => {
       const data = {
         id: userDB._id,
       };
-      const token = await jwt.sign(data, process.env.JWT_SECRET);
+      const maxAge = 2 * 24 * 60 * 60; //2 hari
+      const options = {
+        expiresIn: maxAge,
+      };
+      const token = await jwt.sign(data, process.env.JWT_SECRET, options);
+
+      res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
       return res.status(200).json({
         message: `${userDB.username} berhasil login`,
         token: token,
+        user: userDB,
       });
     } else {
       return res.status(404).json({
@@ -88,10 +95,19 @@ exports.LoginUser = async (req, res) => {
 };
 
 exports.getSingleUser = async (req, res) => {
-  console.log(req.id);
+  console.log("req.id", req.id);
   const user = await User.findById(req.id);
   return res.status(200).json({
     message: "berhasil di panggil",
     data: user,
+  });
+};
+
+exports.LogoutUser = async (req, res) => {
+  res.cookie("jwt", "", { maxAge: 1 });
+  //ini bisa ditambahin res.status(404).redirect("/").json({})
+  return res.status(200).json({
+    message: "berhasil logout",
+    data: res.cookie,
   });
 };

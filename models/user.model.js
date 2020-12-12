@@ -3,15 +3,18 @@ const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
   nama: {
     type: String,
+    required: [true, "nama tidak boleh kosong"],
   },
   nomorHP: {
     type: String,
   },
   username: {
     type: String,
+    required: [true, "username tidak boleh kosong"],
   },
   password: {
     type: String,
+    required: [true, "password tidak boleh kosong"],
   },
   ttl: {
     type: String,

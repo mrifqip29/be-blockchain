@@ -1,6 +1,12 @@
 const mongoose = require("mongoose");
 
 const trxPplPdgSchema = new mongoose.Schema({
+  usernamePengirim: {
+    type: String,
+  },
+  usernamePenerima: {
+    type: String,
+  },
   alamatPengirim: {
     type: String,
   },
@@ -29,6 +35,9 @@ const trxPplPdgSchema = new mongoose.Schema({
     type: String,
   },
   metodePengemasan: {
+    type: String,
+  },
+  status: {
     type: String,
   },
 });
