@@ -76,12 +76,15 @@ exports.LoginUser = async (req, res) => {
       };
       const token = await jwt.sign(data, process.env.JWT_SECRET, options);
 
-      res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
-      return res.status(200).json({
-        message: `${userDB.username} berhasil login`,
-        token: token,
-        user: userDB,
-      });
+      //res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
+      return res
+        .status(200)
+        .cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 })
+        .json({
+          message: `${userDB.username} berhasil login`,
+          token: token,
+          user: userDB,
+        });
     } else {
       return res.status(404).json({
         message: "username atau password tidak cocok",
