@@ -29,6 +29,10 @@ app.use(cookieParser());
 app.use("/", RouteUser);
 app.use("/trx", RouteTrx);
 
+app.get("/", (req, res) => {
+  res.send("Backend Sistem CRUD Blockchain");
+});
+
 app.listen(process.env.PORT, (req, res) => {
   console.log(`server run at port ${process.env.PORT}`);
 });
