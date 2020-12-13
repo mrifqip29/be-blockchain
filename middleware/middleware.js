@@ -4,8 +4,12 @@ const User = require("../models/user.model");
 
 // check jwt token
 exports.Auth = async (req, res, next) => {
-  const token = req.cookies.jwt;
+  //const token = req.cookies.jwt;
+  const auth = req.headers.authorization;
+  console.log("auth", auth);
+  const token = auth.split(" ")[1];
   console.log("token", token);
+
   if (!token) {
     //ini bisa ditambahin res.status(404).redirect("/").json({})
     return res.status(404).json({
@@ -21,8 +25,12 @@ exports.Auth = async (req, res, next) => {
 
 // check jwt token
 exports.CheckUser = async (req, res, next) => {
-  const token = req.cookies.jwt;
+  //const token = req.cookies.jwt;
+  const auth = req.headers.authorization;
+  console.log("auth", auth);
+  const token = auth.split(" ")[1];
   console.log("token", token);
+
   if (!token) {
     //ini bisa ditambahin res.status(404).redirect("/").json({})
     res.locals.user = null;

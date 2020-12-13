@@ -77,9 +77,11 @@ exports.LoginUser = async (req, res) => {
       const token = await jwt.sign(data, process.env.JWT_SECRET, options);
 
       //res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
+
       return res
         .status(200)
-        .cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 })
+        .cookie("jwt", token, { maxAge: maxAge * 1000 })
+        .set("Authorization", "Bearer " + token)
         .json({
           message: `${userDB.username} berhasil login`,
           token: token,
@@ -98,7 +100,7 @@ exports.LoginUser = async (req, res) => {
 };
 
 exports.getSingleUser = async (req, res) => {
-  console.log("req.id", req.id);
+  console.log("userid", req.id);
   const user = await User.findById(req.id);
   return res.status(200).json({
     message: "berhasil di panggil",
@@ -108,9 +110,12 @@ exports.getSingleUser = async (req, res) => {
 
 exports.LogoutUser = async (req, res) => {
   res.cookie("jwt", "", { maxAge: 1 });
+  res.set("Authorization", "Bearer ");
+  //idk if this will work
+  console.log(res.header);
   //ini bisa ditambahin res.status(404).redirect("/").json({})
   return res.status(200).json({
     message: "berhasil logout",
-    data: res.cookie,
+    data: null,
   });
 };
