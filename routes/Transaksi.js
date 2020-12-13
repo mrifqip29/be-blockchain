@@ -5,18 +5,24 @@ const {
   getAllByCreatorNamePkr,
   getAllByReceiverNamePtn,
   getAllUnconfirmedTrxPtn,
+  getAllConfirmedTrxPtn,
+  confirmTrxByIDPtn,
 } = require("../controllers/trx-penangkar-petani.controller");
 const {
   CreateTrxPtnPpl,
   getAllByCreatorNamePtn,
   getAllByReceiverNamePpl,
   getAllUnconfirmedTrxPpl,
+  getAllConfirmedTrxPpl,
+  confirmTrxByIDPpl,
 } = require("../controllers/trx-petani-pengumpul.controller");
 const {
   CreateTrxPplPdg,
   getAllByCreatorNamePpl,
   getAllByReceiverNamePdg,
   getAllUnconfirmedTrxPdg,
+  getAllConfirmedTrxPdg,
+  confirmTrxByIDPdg,
 } = require("../controllers/trx-pengumpul-pedagang.controller");
 const { Auth, CheckUser } = require("../middleware/middleware");
 
@@ -37,5 +43,14 @@ router.get("/ppl-pdg/receiver", Auth, getAllByReceiverNamePdg);
 router.get("/pkr-ptn/unconfirmed", Auth, getAllUnconfirmedTrxPtn);
 router.get("/ptn-ppl/unconfirmed", Auth, getAllUnconfirmedTrxPpl);
 router.get("/ppl-pdg/unconfirmed", Auth, getAllUnconfirmedTrxPdg);
+
+router.get("/pkr-ptn/confirm", Auth, getAllConfirmedTrxPtn);
+router.get("/ptn-ppl/confirm", Auth, getAllConfirmedTrxPpl);
+router.get("/ppl-pdg/confirm", Auth, getAllConfirmedTrxPdg);
+
+// giamna caranya pake id
+router.post("/pkr-ptn/confirm", Auth, confirmTrxByIDPtn);
+router.post("/ptn-ppl/confirm", Auth, confirmTrxByIDPpl);
+router.post("/ppl-pdg/confirm", Auth, confirmTrxByIDPdg);
 
 module.exports = router;

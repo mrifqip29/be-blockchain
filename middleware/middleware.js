@@ -2,6 +2,7 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const User = require("../models/user.model");
 
+//TODO confirm the token == user token
 // check jwt token
 exports.Auth = async (req, res, next) => {
   //const token = req.cookies.jwt;

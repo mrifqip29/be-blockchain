@@ -59,7 +59,7 @@ exports.CreateTrxPplPdg = async (req, res) => {
 exports.getAllByCreatorNamePpl = async (req, res) => {
   const user = await User.findById(req.id);
   if (user.memberType == "pedagang") {
-    const trx = await Trx.findOne({ createdBy: user.username });
+    const trx = await Trx.find({ usernamePengirim: user.username });
     console.log("transaksi:", trx);
     if (trx) {
       return res.status(200).json({
@@ -84,7 +84,7 @@ exports.getAllByReceiverNamePdg = async (req, res) => {
   const user = await User.findById(req.id);
 
   if (user.memberType == "pedagang") {
-    const trx = await Trx.findOne({ namaPenerima: user.username });
+    const trx = await Trx.find({ usernamePenerima: user.username });
     console.log("transaksi:", trx);
     if (trx) {
       return res.status(200).json({
@@ -109,7 +109,10 @@ exports.getAllUnconfirmedTrxPdg = async (req, res) => {
   const user = await User.findById(req.id);
 
   if (user.memberType == "pedagang") {
-    const trx = await Trx.find({ status: "pending" });
+    const trx = await Trx.find({
+      status: "pending",
+      usernamePenerima: user.username,
+    });
     console.log("transaksi:", trx);
     if (trx) {
       return res.status(200).json({
@@ -126,6 +129,58 @@ exports.getAllUnconfirmedTrxPdg = async (req, res) => {
     return res.status(404).json({
       message: `anda tidak memiliki akses terhadap fungsi ini, peran anda ${user.memberType}`,
       data: null,
+    });
+  }
+};
+
+exports.getAllConfirmedTrxPdg = async (req, res) => {
+  const user = await User.findById(req.id);
+
+  if (user.memberType == "petani") {
+    const trx = await Trx.find({
+      status: "confirmed",
+      usernamePenerima: user.username,
+    });
+    console.log("transaksi:", trx);
+    if (trx) {
+      return res.status(200).json({
+        message: "transaksi berhasil di panggil",
+        data: trx,
+      });
+    } else {
+      return res.status(404).json({
+        message: "transaksi tidak ditemukan",
+        data: trx,
+      });
+    }
+  } else {
+    return res.status(404).json({
+      message: `anda tidak memiliki akses terhadap fungsi ini, peran anda ${user.memberType}`,
+      data: null,
+    });
+  }
+};
+
+exports.confirmTrxByIDPdg = async (req, res) => {
+  const { trxID } = req.body;
+
+  console.log("trxID", trxID);
+
+  const trx = await Trx.findByIdAndUpdate(
+    trxID,
+    { status: "confirmed" },
+    { new: true }
+  );
+  console.log("trx", trx);
+  if (trx) {
+    return res.status(200).json({
+      message: "transaksi berhasil di konfirmasi",
+      data: trx,
+    });
+  } else {
+    return res.status(404).json({
+      message: "transaksi tidak berhasil di konfirmasi",
+      data: trx,
     });
   }
 };
