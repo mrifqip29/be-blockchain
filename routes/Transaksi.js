@@ -48,7 +48,6 @@ router.get("/pkr-ptn/confirm", Auth, getAllConfirmedTrxPtn);
 router.get("/ptn-ppl/confirm", Auth, getAllConfirmedTrxPpl);
 router.get("/ppl-pdg/confirm", Auth, getAllConfirmedTrxPdg);
 
-// giamna caranya pake id
 router.post("/pkr-ptn/confirm", Auth, confirmTrxByIDPtn);
 router.post("/ptn-ppl/confirm", Auth, confirmTrxByIDPpl);
 router.post("/ppl-pdg/confirm", Auth, confirmTrxByIDPdg);
