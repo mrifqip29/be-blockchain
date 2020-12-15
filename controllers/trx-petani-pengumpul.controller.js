@@ -21,6 +21,7 @@ exports.CreateTrxPtnPpl = async (req, res) => {
       pupuk,
       pestisida,
       perlakuan,
+      batchID,
     } = req.body;
 
     // for(let obj in req.body) {

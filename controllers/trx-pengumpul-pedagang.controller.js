@@ -21,6 +21,7 @@ exports.CreateTrxPplPdg = async (req, res) => {
       alamatGudang,
       teknikSorting,
       metodePengemasan,
+      batchID,
     } = req.body;
 
     // for(let obj in req.body) {
