@@ -7,7 +7,7 @@ exports.CreateTrxPkrPtn = async (req, res) => {
   const user = await User.findById(req.id);
   console.log("user:", user);
 
-  let batchID = "batch-" - Math.random().toString(36).substring(4, 8);
+  let batchID = "batch-" + Math.random().toString(36).substring(4, 8);
   let transaksiID = "transaksi-" + Math.random().toString(27).substring(4, 8);
 
   if (user.memberType == "penangkar") {

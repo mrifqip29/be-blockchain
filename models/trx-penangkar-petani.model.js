@@ -40,9 +40,6 @@ const trxPkrPtnSchema = new mongoose.Schema({
   status: {
     type: String,
   },
-  kelompokTani: {
-    type: String,
-  },
   transaksiID: {
     type: String,
   },
