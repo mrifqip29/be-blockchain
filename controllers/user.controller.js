@@ -36,6 +36,8 @@ exports.DaftarUser = async (req, res) => {
     kelompokTani = "";
   }
 
+  let userID = memberType + Math.random().toString(27).substring(4, 8);
+
   const user = new User({
     nama: nama,
     noHp: noHP,
@@ -50,6 +52,7 @@ exports.DaftarUser = async (req, res) => {
     alamatToko: alamatToko,
     alamatLahan: alamatLahan,
     kelompokTani: kelompokTani,
+    userID: userID,
   });
 
   user.save();

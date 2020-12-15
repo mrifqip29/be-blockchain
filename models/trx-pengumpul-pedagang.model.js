@@ -22,9 +22,6 @@ const trxPplPdgSchema = new mongoose.Schema({
   timestamp: {
     type: Date,
   },
-  bawangID: {
-    type: String,
-  },
   tanggalMasuk: {
     type: String,
   },
@@ -38,6 +35,15 @@ const trxPplPdgSchema = new mongoose.Schema({
     type: String,
   },
   status: {
+    type: String,
+  },
+  kelompokTani: {
+    type: String,
+  },
+  transaksiID: {
+    type: String,
+  },
+  batchID: {
     type: String,
   },
 });

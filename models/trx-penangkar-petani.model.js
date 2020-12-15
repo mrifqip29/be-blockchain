@@ -25,6 +25,9 @@ const trxPkrPtnSchema = new mongoose.Schema({
   umurBenih: {
     type: String,
   },
+  umurPanen: {
+    type: String,
+  },
   lamaPenyimpanan: {
     type: String,
   },
@@ -35,6 +38,15 @@ const trxPkrPtnSchema = new mongoose.Schema({
     type: String,
   },
   status: {
+    type: String,
+  },
+  kelompokTani: {
+    type: String,
+  },
+  transaksiID: {
+    type: String,
+  },
+  batchID: {
     type: String,
   },
 });

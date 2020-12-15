@@ -6,6 +6,9 @@ const e = require("express");
 exports.CreateTrxPplPdg = async (req, res) => {
   const user = await User.findById(req.id);
   console.log("user:", user);
+
+  let transaksiID = "transaksi-" + Math.random().toString(27).substring(4, 8);
+
   if (user.memberType == "pengumpul") {
     const {
       namaPenerima,
@@ -40,6 +43,8 @@ exports.CreateTrxPplPdg = async (req, res) => {
       metodePengemasan,
       timestamp: Date.now(),
       status: "pending",
+      transaksiID = transaksiID,
+      batchID = batchID,
     });
 
     trx.save();

@@ -37,7 +37,16 @@ const trxPtnPplSchema = new mongoose.Schema({
   perlakuan: {
     type: String,
   },
+  produktivitas: {
+    type: String,
+  },
   status: {
+    type: String,
+  },
+  transaksiID: {
+    type: String,
+  },
+  batchID: {
     type: String,
   },
 });

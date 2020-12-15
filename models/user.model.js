@@ -43,6 +43,9 @@ const userSchema = new mongoose.Schema({
   kelompokTani: {
     type: String,
   },
+  userID: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);
