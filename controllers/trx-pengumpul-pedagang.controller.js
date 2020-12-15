@@ -43,8 +43,8 @@ exports.CreateTrxPplPdg = async (req, res) => {
       metodePengemasan,
       timestamp: Date.now(),
       status: "pending",
-      transaksiID = transaksiID,
-      batchID = batchID,
+      transaksiID: transaksiID,
+      batchID: batchID,
     });
 
     trx.save();

@@ -42,8 +42,8 @@ exports.CreateTrxPkrPtn = async (req, res) => {
       hargaBenih: hargaBenih,
       timestamp: Date.now(),
       status: "pending",
-      transaksiID = transaksiID,
-      batchID = batchID,
+      transaksiID: transaksiID,
+      batchID: batchID,
     });
 
     trx.save();
