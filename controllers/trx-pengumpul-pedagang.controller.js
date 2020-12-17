@@ -65,7 +65,7 @@ exports.CreateTrxPplPdg = async (req, res) => {
 exports.getAllByCreatorNamePpl = async (req, res) => {
   const user = await User.findById(req.id);
   if (user.memberType == "pedagang") {
-    const trx = await Trx.find({ usernamePengirim: user.username });
+    const trx = await Trx.find({ usernamePengirim: user.username }).limit(10);
     console.log("transaksi:", trx);
     if (trx) {
       return res.status(200).json({
@@ -90,7 +90,7 @@ exports.getAllByReceiverNamePdg = async (req, res) => {
   const user = await User.findById(req.id);
 
   if (user.memberType == "pedagang") {
-    const trx = await Trx.find({ usernamePenerima: user.username });
+    const trx = await Trx.find({ usernamePenerima: user.username }).limit(10);
     console.log("transaksi:", trx);
     if (trx) {
       return res.status(200).json({
@@ -118,7 +118,7 @@ exports.getAllUnconfirmedTrxPdg = async (req, res) => {
     const trx = await Trx.find({
       status: "pending",
       usernamePenerima: user.username,
-    });
+    }).limit(10);
     console.log("transaksi:", trx);
     if (trx) {
       return res.status(200).json({
@@ -146,7 +146,7 @@ exports.getAllConfirmedTrxPdg = async (req, res) => {
     const trx = await Trx.find({
       status: "confirmed",
       usernamePenerima: user.username,
-    });
+    }).limit(10);
     console.log("transaksi:", trx);
     if (trx) {
       return res.status(200).json({
