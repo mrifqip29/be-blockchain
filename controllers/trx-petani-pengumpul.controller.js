@@ -16,19 +16,13 @@ exports.CreateTrxPtnPpl = async (req, res) => {
       alamatPenerima,
       kuantitas,
       harga,
-      ukuranBenih,
+      ukuranUmbi,
       kadarAir,
       pupuk,
       pestisida,
       perlakuan,
       batchID,
     } = req.body;
-
-    // for(let obj in req.body) {
-    //   if(req.body[obj]=="" || null) {
-
-    //   }
-    // }
 
     const trx = new Trx({
       usernamePengirim: user.username,
@@ -37,7 +31,7 @@ exports.CreateTrxPtnPpl = async (req, res) => {
       alamatPenerima: alamatPenerima,
       kuantitas: kuantitas,
       harga: harga,
-      ukuranBenih: ukuranBenih,
+      ukuranBenih: ukuranUmbi,
       kadarAir: kadarAir,
       pupuk: pupuk,
       pestisida: pestisida,
@@ -111,7 +105,64 @@ exports.getAllByReceiverNamePpl = async (req, res) => {
   }
 };
 
-exports.getAllUnconfirmedTrxPpl = async (req, res) => {
+exports.getAllUnconfirmedTrxPtnSent = async (req, res) => {
+  const user = await User.findById(req.id);
+
+  console.log("username", user.username);
+  if (user.memberType == "petani") {
+    const trx = await Trx.find({
+      status: "pending",
+      usernamePengirim: user.username,
+    }).limit(10);
+    console.log("transaksi:", trx);
+    if (trx) {
+      return res.status(200).json({
+        message: "transaksi berhasil di panggil",
+        data: trx,
+      });
+    } else {
+      return res.status(404).json({
+        message: "transaksi tidak ditemukan",
+        data: trx,
+      });
+    }
+  } else {
+    return res.status(404).json({
+      message: `anda tidak memiliki akses terhadap fungsi ini, peran anda ${user.memberType}`,
+      data: null,
+    });
+  }
+};
+
+exports.getAllConfirmedTrxPtnSent = async (req, res) => {
+  const user = await User.findById(req.id);
+
+  if (user.memberType == "petani") {
+    const trx = await Trx.find({
+      status: "confirmed",
+      usernamePengirim: user.username,
+    }).limit(10);
+    console.log("transaksi:", trx);
+    if (trx) {
+      return res.status(200).json({
+        message: "transaksi berhasil di panggil",
+        data: trx,
+      });
+    } else {
+      return res.status(404).json({
+        message: "transaksi tidak ditemukan",
+        data: trx,
+      });
+    }
+  } else {
+    return res.status(404).json({
+      message: `anda tidak memiliki akses terhadap fungsi ini, peran anda ${user.memberType}`,
+      data: null,
+    });
+  }
+};
+
+exports.getAllUnconfirmedTrxPplInbox = async (req, res) => {
   const user = await User.findById(req.id);
 
   if (user.memberType == "pengumpul") {
@@ -139,10 +190,10 @@ exports.getAllUnconfirmedTrxPpl = async (req, res) => {
   }
 };
 
-exports.getAllConfirmedTrxPpl = async (req, res) => {
+exports.getAllConfirmedTrxPplInbox = async (req, res) => {
   const user = await User.findById(req.id);
 
-  if (user.memberType == "petani") {
+  if (user.memberType == "pengumpul") {
     const trx = await Trx.find({
       status: "confirmed",
       usernamePenerima: user.username,

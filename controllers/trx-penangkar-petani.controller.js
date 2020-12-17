@@ -23,12 +23,6 @@ exports.CreateTrxPkrPtn = async (req, res) => {
       hargaBenih,
     } = req.body;
 
-    // for(let obj in req.body) {
-    //   if(req.body[obj]=="" || null) {
-
-    //   }
-    // }
-
     const trx = new Trx({
       usernamePengirim: user.username,
       usernamePenerima: namaPenerima,
@@ -111,7 +105,63 @@ exports.getAllByReceiverNamePtn = async (req, res) => {
   }
 };
 
-exports.getAllUnconfirmedTrxPtn = async (req, res) => {
+exports.getAllUnconfirmedTrxPkrSent = async (req, res) => {
+  const user = await User.findById(req.id);
+
+  if (user.memberType == "penangkar") {
+    const trx = await Trx.find({
+      status: "pending",
+      usernamePengirim: user.username,
+    }).limit(10);
+    console.log("transaksi:", trx);
+    if (trx) {
+      return res.status(200).json({
+        message: "transaksi berhasil di panggil",
+        data: trx,
+      });
+    } else {
+      return res.status(404).json({
+        message: "transaksi tidak ditemukan",
+        data: trx,
+      });
+    }
+  } else {
+    return res.status(404).json({
+      message: `anda tidak memiliki akses terhadap fungsi ini, peran anda ${user.memberType}`,
+      data: null,
+    });
+  }
+};
+
+exports.getAllConfirmedTrxPkrSent = async (req, res) => {
+  const user = await User.findById(req.id);
+
+  if (user.memberType == "penangkar") {
+    const trx = await Trx.find({
+      status: "confirmed",
+      usernamePengirim: user.username,
+    }).limit(10);
+    console.log("transaksi:", trx);
+    if (trx) {
+      return res.status(200).json({
+        message: "transaksi berhasil di panggil",
+        data: trx,
+      });
+    } else {
+      return res.status(404).json({
+        message: "transaksi tidak ditemukan",
+        data: trx,
+      });
+    }
+  } else {
+    return res.status(404).json({
+      message: `anda tidak memiliki akses terhadap fungsi ini, peran anda ${user.memberType}`,
+      data: null,
+    });
+  }
+};
+
+exports.getAllUnconfirmedTrxPtnInbox = async (req, res) => {
   const user = await User.findById(req.id);
 
   if (user.memberType == "petani") {
@@ -139,7 +189,7 @@ exports.getAllUnconfirmedTrxPtn = async (req, res) => {
   }
 };
 
-exports.getAllConfirmedTrxPtn = async (req, res) => {
+exports.getAllConfirmedTrxPtnInbox = async (req, res) => {
   const user = await User.findById(req.id);
 
   if (user.memberType == "petani") {
