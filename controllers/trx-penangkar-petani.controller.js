@@ -12,7 +12,7 @@ exports.CreateTrxPkrPtn = async (req, res) => {
 
   if (user.memberType == "penangkar") {
     const {
-      namaPenerima,
+      usernamePenerima,
       alamatPengirim,
       alamatPenerima,
       kuantitas,
@@ -25,7 +25,7 @@ exports.CreateTrxPkrPtn = async (req, res) => {
 
     const trx = new Trx({
       usernamePengirim: user.username,
-      usernamePenerima: namaPenerima,
+      usernamePenerima: usernamePenerima,
       alamatPengirim: alamatPengirim,
       alamatPenerima: alamatPenerima,
       kuantitas: kuantitas,

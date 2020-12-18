@@ -14,10 +14,10 @@ const trxPplPdgSchema = new mongoose.Schema({
     type: String,
   },
   kuantitas: {
-    type: Number,
+    type: String,
   },
   harga: {
-    type: Number,
+    type: String,
   },
   timestamp: {
     type: Date,

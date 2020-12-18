@@ -11,7 +11,7 @@ exports.CreateTrxPplPdg = async (req, res) => {
 
   if (user.memberType == "pengumpul") {
     const {
-      namaPenerima,
+      usernamePenerima,
       alamatPengirim,
       alamatPenerima,
       kuantitas,
@@ -31,7 +31,7 @@ exports.CreateTrxPplPdg = async (req, res) => {
 
     const trx = new Trx({
       usernamePengirim: user.username,
-      usernamePenerima: namaPenerima,
+      usernamePenerima: usernamePenerima,
       alamatPengirim: alamatPengirim,
       alamatPenerima: alamatPenerima,
       kuantitas: kuantitas,

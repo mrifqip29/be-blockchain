@@ -11,7 +11,7 @@ exports.CreateTrxPtnPpl = async (req, res) => {
 
   if (user.memberType == "petani") {
     const {
-      namaPenerima,
+      usernamePenerima,
       alamatPengirim,
       alamatPenerima,
       kuantitas,
@@ -26,12 +26,12 @@ exports.CreateTrxPtnPpl = async (req, res) => {
 
     const trx = new Trx({
       usernamePengirim: user.username,
-      usernamePenerima: namaPenerima,
+      usernamePenerima: usernamePenerima,
       alamatPengirim: alamatPengirim,
       alamatPenerima: alamatPenerima,
       kuantitas: kuantitas,
       harga: harga,
-      ukuranBenih: ukuranUmbi,
+      ukuranUmbi: ukuranUmbi,
       kadarAir: kadarAir,
       pupuk: pupuk,
       pestisida: pestisida,
